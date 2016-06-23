@@ -1,2 +1,2 @@
 # httpd-legend
-# Apache Rules
+Apache Rules
