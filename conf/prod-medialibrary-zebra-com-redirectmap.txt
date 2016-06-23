@@ -1,0 +1,6 @@
+RewriteMap lc               int:tolower
+RewriteMap locale           txt:/etc/httpd/rewrite_maps/locale.txt
+RewriteMap locale_remap     txt:/etc/httpd/rewrite_maps/locale_remap.txt
+RewriteMap sub_path         dbm:/etc/httpd/rewrite_maps/sub_path.map
+RewriteMap zebra_vanity_url dbm:/etc/httpd/rewrite_maps/zebra_vanity_url.map
+RewriteMap legacy_zebra     dbm:/etc/httpd/rewrite_maps/legacy_zebra.map

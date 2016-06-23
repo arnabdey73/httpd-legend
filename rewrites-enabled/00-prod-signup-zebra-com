@@ -1,0 +1,40 @@
+# temporary to ctmsp.com
+RewriteCond %{HTTP_HOST} ^signup\.zebra\.ctmsp\.com$ [NC]
+RewriteRule ^/$ http://signup.zebra.com [R,L]
+
+# Handle request that starts with /content/userreg
+    RewriteCond     %{HTTP_HOST}   ^signup.zebra.com$  [OR]
+    RewriteCond     %{HTTPS_HOST}  ^signup.zebra.com$
+    RewriteCond     %{REQUEST_URI} ^/content/userreg*
+    RewriteCond     %{REQUEST_URI} .*.html
+    RewriteRule     ^/content/userreg/(.*)$ /$1 [R,QSA]
+
+# Handle requests that does not contain /content/userreg/
+    RewriteCond     %{HTTP_HOST}   ^signup.zebra.com$  [OR]
+    RewriteCond     %{HTTPS_HOST}  ^signup.zebra.com$
+    RewriteCond     %{REQUEST_URI} !^/content/userreg/
+    RewriteCond     %{REQUEST_URI} !^/content/dam
+    RewriteCond     %{REQUEST_URI} !^/libs
+    RewriteCond     %{REQUEST_URI} !^/etc
+    RewriteCond     %{REQUEST_URI} !^/apps
+    RewriteCond     %{REQUEST_URI} !^/content/dam
+    RewriteCond     %{REQUEST_URI} .*.(html|json)
+    RewriteCond     %{REQUEST_URI} !^/$
+    RewriteRule     ^/(.*).(html|json)$ /content/userreg/$1.$2 [PT,L,QSA]
+
+ # Handle requests to root with a trailing slash
+    RewriteCond     %{HTTP_HOST}   ^signup.zebra.com$  [OR]
+    RewriteCond     %{HTTPS_HOST}  ^signup.zebra.com$
+    RewriteCond     %{REQUEST_URI} !^/content/dam
+    RewriteCond     %{REQUEST_URI} ^/$
+    RewriteRule     (.*)/$ /register.html [R,QSA]
+
+# Handle requests to index.html
+    RewriteCond     %{HTTP_HOST}   ^signup.zebra.com$  [OR]
+    RewriteCond     %{HTTPS_HOST}  ^signup.zebra.com$
+    RewriteCond     %{REQUEST_URI} !^/content/dam
+    RewriteCond     %{REQUEST_URI} ^/index.html$
+    RewriteRule     ^/index.html$ /register.html [R,QSA]
+
+#RewriteCond %{HTTPS} !=on
+#RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
