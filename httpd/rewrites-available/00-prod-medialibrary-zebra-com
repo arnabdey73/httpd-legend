@@ -1,0 +1,5 @@
+RewriteCond %{HTTP_HOST} ^prodaws-medialibrary\.zebra\.com$ [NC]
+RewriteRule ^/$ https://%{HTTP_HOST}/content/zebra-media-library.html [R,L]
+
+RewriteCond %{HTTP_HOST} ^medialibrary\.zebra\.com$ [NC]
+RewriteRule ^/$ https://%{HTTP_HOST}/content/zebra-media-library.html [R,L]
