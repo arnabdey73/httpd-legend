@@ -1,0 +1,1017 @@
+RewriteCond %{HTTP_HOST} ^stage-www\.zebra\.ctmsp\.com$ [NC]
+RewriteRule ^/$ http://stage-www.zebra.com/us/en.html [R,L]
+
+RewriteCond %{HTTP_HOST} ^stage-www\.zebra\.com$ [NC]
+RewriteRule ^/$ http://%{HTTP_HOST}/us/en.html [R,L]
+
+RewriteCond %{HTTP_HOST} ^orig-stage-www\.zebra\.com$ [NC]
+RewriteRule ^/$ http://%{HTTP_HOST}/us/en.html [R,L]
+
+RewriteCond %{HTTP_HOST} ^i-b2d1ba29.zebra-stage\.ctmsp\.com$ [NC]
+RewriteRule ^/$ http://%{HTTP_HOST}/us/en.html [R,L]
+
+RewriteCond %{QUERY_STRING} ^tactic_type=(.*)&tactic_detail=(.*)$
+RewriteRule ^tactic_type=(.*)$ http://i-b2d1ba29.zebra-stage.ctmsp.com/$1/%1 [L,R=301]
+
+RewriteCond %{HTTP_HOST}   ^zebra\.com [NC]
+RewriteCond %{HTTP_HOST}   !^$
+RewriteRule ^/?(.*)         http://www.zebra.com/$1 [L,R,NE]
+
+# ticket 15320 - bdichter 20160818
+RewriteCond %{HTTP_HOST}   ^stage-www\.zebra\.com [NC]
+RewriteRule ^/(us/en|gb/en|ap/en)/products/parts/desktop-parts.html$ https://stage-www.zebra.com/us/en/products/parts.html [R=301,L]
+
+RewriteCond %{HTTP_HOST}   ^stage-www\.zebra\.com [NC]
+RewriteRule ^/(gb/en|us/en|ap/en)/products/parts/zxp-parts.html$ https://stage-www.zebra.com/us/en/products/parts.html [R=301,L]
+
+RewriteCond %{HTTP_HOST}   ^stage-www\.zebra\.com [NC]
+RewriteRule ^/(gb/en|us/en|ap/en)/products/parts/kiosk-parts.html$ https://stage-www.zebra.com/us/en/products/parts.html [R=301,L]
+
+RewriteCond %{HTTP_HOST}   ^stage-www\.zebra\.com [NC]
+RewriteRule ^/(gb/en|us/en|ap/en|pl/pl)/products/parts/rfid-parts.html$ https://stage-www.zebra.com/us/en/products/parts.html [R=301,L]
+
+RewriteCond %{HTTP_HOST}   ^stage-www\.zebra\.com [NC]
+RewriteRule ^/(gb/en|us/en|la/es)/products/parts/industrial-parts.html$ https://stage-www.zebra.com/us/en/products/parts.html [R=301,L]
+
+RewriteCond %{HTTP_HOST}   ^stage-www\.zebra\.com [NC]
+RewriteRule ^/(us/en|pl/pl|de/de|kr/ko|ap/en)/products/parts/print-engine-parts.html$ https://stage-www.zebra.com/us/en/products/parts.html [R=301,L]
+
+
+# Handle request that starts with /content/zebra1
+   #RewriteCond     %{HTTP_HOST}   ^(stage|qa)-www.zebra.com$  [OR]
+   #RewriteCond     %{HTTPS_HOST}  ^(stage|qa)-www.zebra.com$
+   #RewriteCond     %{REQUEST_URI} ^/content/zebra1*
+   #RewriteCond     %{REQUEST_URI} .*.html
+   #RewriteRule     ^/content/zebra1/(.*)$ /$1 [R,QSA]
+
+# Handle requests that does not contain /content/zebra1/
+   #RewriteCond     %{HTTP_HOST}   ^(stage|qa)-www.zebra.com$  [OR]
+   #RewriteCond     %{HTTPS_HOST}  ^(stage|qa)-www.zebra.com$
+   #RewriteCond     %{REQUEST_URI} !^/content/zebra1/
+   #RewriteCond     %{REQUEST_URI} !^/content/dam
+   #RewriteCond     %{REQUEST_URI} !^/libs
+   #RewriteCond     %{REQUEST_URI} !^/etc
+   #RewriteCond     %{REQUEST_URI} !^/apps
+   #RewriteCond     %{REQUEST_URI} .*.(html|json)
+   #RewriteCond     %{REQUEST_URI} !^/$
+   #RewriteRule     ^/(.*).(html|json)$ /content/zebra1/$1.$2 [PT,L,QSA]
+
+
+
+	# Redirection for /media-center/ > /newsroom/ MDO-639
+	RewriteRule ^/us/en/about-zebra/media-center/(.*) /us/en/about-zebra/newsroom/$1 [R,L]
+
+	# Note: in "rewritemap" directive, change "txt" to "dbm" and "sub_path.txt" to "sub_path.map" if using hash file.
+
+	# MDO-812
+	RewriteRule ^/content/dam/zebra_new_ia/en_us/(.*)$ /content/dam/zebra_new_ia/en-us/$1 [R,L]
+
+	#SYS-177
+	Redirect 301 /autodiscover/autodiscover.svc https://webmail.zebra.com/autodiscover/autodiscover.xml
+	Redirect 301 /autodiscover/autodiscover.xml https://webmail.zebra.com/autodiscover/autodiscover.xml
+
+        #RewriteCond %{REQUEST_URI} ^/fr/fr/products/mobile-computers.html [or]
+        #RewriteCond %{REQUEST_URI} ^/fr/fr/products/mobile-computers/(.*)$ [or]
+
+	# MDO-737
+        RedirectMatch 301 ^/gb/en/solutions/industry/manufacturing/food-supply-chain/food-allergen-labelling.html /gb/en/solutions/manufacturing-solutions/food-allergen-labelling.html
+        RedirectMatch 301 ^/gb/en/solutions/industry/manufacturing/pharmaceutical-medical-devices/medical-device-identification.html /gb/en/solutions/manufacturing-solutions/device-management/medical-device-identification.html
+
+        #CON-3313
+        Redirect 302 /industrial-video-experience http://www.vrtl-events.com/zebra-industrial-video-experience
+
+	# MDO-723: Contact
+        RedirectMatch 301 ^/gb/en/day/forms/contact-me-general-inquiry-es.html http://online.zebra.com/Contact-ENB
+        RedirectMatch 301 ^/gb/en/day/forms/contact-me-general-inquiry-it.html http://online.zebra.com/Contact-ENB
+        RedirectMatch 301 ^/gb/en/day/forms/contact-me-general-inquiry-pl.html http://online.zebra.com/Contact-ENB
+        RedirectMatch 301 ^/gb/en/day/forms/contact-me-general-inquiry-ru.html http://online.zebra.com/Contact-ENB
+        RedirectMatch 301 ^/gb/en/day/forms/contact-me-general-inquiry-tr.html http://online.zebra.com/Contact-ENB
+	RedirectMatch 301 ^/us/en/about-zebra/contact-us/contact-zebra.html http://online.zebra.com/Contact-ENU
+
+	# WEB-4651 - Partner
+	RedirectMatch 301 ^/us/en/locator.html http://online.zebra.com/Contact-ENU
+	RedirectMatch 301 ^/gb/en/locator.html http://online.zebra.com/Contact-ENB
+	RedirectMatch 301 ^/pl/pl/locator.html http://online.zebra.com/Contact-POL
+	RedirectMatch 301 ^/ru/ru/locator.html http://online.zebra.com/Contact-RUS
+	RedirectMatch 301 ^/it/it/locator.html http://online.zebra.com/Contact-ITA
+	RedirectMatch 301 ^/tr/tr/locator.html http://online.zebra.com/Contact-TUR
+	RedirectMatch 301 ^/es/es/locator.html http://online.zebra.com/Contact-ESP
+	RedirectMatch 301 ^/la/es/locator.html http://online.zebra.com/Contact-ESN
+	RedirectMatch 301 ^/br/pt/locator.html http://online.zebra.com/Contact-PTB
+	RedirectMatch 301 ^/jp/ja/locator.html http://online.zebra.com/Contact-JPN
+	RedirectMatch 301 ^/kr/ko/locator.html http://online.zebra.com/Contact-KOR
+	RedirectMatch 301 ^/cn/zh/locator.html http://online.zebra.com/Contact-CHS
+	RedirectMatch 301 ^/de/de/locator.html http://online.zebra.com/Contact-DEU
+	RedirectMatch 301 ^/fr/fr/locator.html http://online.zebra.com/Contact-FRA
+	RedirectMatch 301 ^/us/en/partners/find-a-partner.html http://online.zebra.com/Contact-ENU
+	RedirectMatch 301 ^/gb/en/partners/find-a-partner.html http://online.zebra.com/Contact-ENB
+	RedirectMatch 301 ^/pl/pl/partners/find-a-partner.html http://online.zebra.com/Contact-POL
+	RedirectMatch 301 ^/ru/ru/partners/find-a-partner.html http://online.zebra.com/Contact-RUS
+	RedirectMatch 301 ^/it/it/partners/find-a-partner.html http://online.zebra.com/Contact-ITA
+	RedirectMatch 301 ^/tr/tr/partners/find-a-partner.html http://online.zebra.com/Contact-TUR
+	RedirectMatch 301 ^/es/es/partners/find-a-partner.html http://online.zebra.com/Contact-ESP
+	RedirectMatch 301 ^/la/es/partners/find-a-partner.html http://online.zebra.com/Contact-ESN
+	RedirectMatch 301 ^/br/pt/partners/find-a-partner.html http://online.zebra.com/Contact-PTB
+	RedirectMatch 301 ^/jp/ja/partners/find-a-partner.html http://online.zebra.com/Contact-JPN
+	RedirectMatch 301 ^/kr/ko/partners/find-a-partner.html http://online.zebra.com/Contact-KOR
+	RedirectMatch 301 ^/cn/zh/partners/find-a-partner.html http://online.zebra.com/Contact-CHS
+	RedirectMatch 301 ^/de/de/partners/find-a-partner.html http://online.zebra.com/Contact-DEU
+	RedirectMatch 301 ^/fr/fr/partners/find-a-partner.html http://online.zebra.com/Contact-FRA
+
+	# Ticket 15064 - adey - Adding redirect
+	#RedirectMatch 301 ^/(pl/pl|ru/ru|tr/tr)/products/printers/rfid/on-metal-rfid-label-solution.html /gb/en/products/printers/rfid/on-metal-rfid-label-solution.html	
+
+	# Ticket 14992 - adey - Adding redirect
+	#RedirectMatch 301 ^/(de/de|es/es|fr/fr|it/it)/products/printers/rfid/on-metal-rfid-label-solution.html /gb/en/products/printers/rfid/on-metal-rfid-label-solution.html
+
+	# Ticket 14924 - ldavis - Add exceptions and redirect - 20160718
+	RedirectMatch 301 ^/la/es/products/scanners/general-purpose-scanners/handheld/ds4308-xd.html /us/en/products/scanners/general-purpose-scanners/handheld/ds4308-xd.html
+
+	# Ticket 15398 - adding redirects - cbowers 20160824
+        RedirectMatch 301 ^/gb/en/products/software/barcode-printers/buy-software.html  /gb/en/products/software.html
+        RedirectMatch 301 ^/us/en/products/software/barcode-printers/buy-software.html  /us/en/products/software.html
+	
+	# Ticket 15432 - adey - Adding redirect
+	#   Ticket 15588 - Request to remove this exception
+	#RedirectMatch 301 ^/tr/tr/products/printers/rfid/on-metal-rfid-label-solution.html /gb/en/products/printers/rfid/on-metal-rfid-label-solution.html
+
+
+	# language pages
+	RewriteCond %{REQUEST_URI} ^/de/de/campaigns-emea/future-manufacturing.html$ [or]
+	RewriteCond %{REQUEST_URI} ^/gb/en/campaigns-emea/future-manufacturing.html$ [or]
+	RewriteCond %{REQUEST_URI} ^/gb/en/campaigns-emea/industry-challenges.html$ [or]
+	RewriteCond %{REQUEST_URI} ^/gb/en/campaigns-emea/achieving-visibilty.html [or]
+	RewriteCond %{REQUEST_URI} ^/de/de/campaigns-emea/industry-challenges.html [or]
+	RewriteCond %{REQUEST_URI} ^/de/de/campaigns-emea/achieving-visibilty.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/campaigns-emea/future-manufacturing.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/campaigns-emea/industry-challenges.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/campaigns-emea/achieving-visibilty.html [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/campaigns-emea/future-manufacturing.html [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/campaigns-emea/industry-challenges.html [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/campaigns-emea/achieving-visibilty.html [or]
+	RewriteCond %{REQUEST_URI} ^/gb/en/solutions/industry/healthcare/patientid.html [or]
+	RewriteCond %{REQUEST_URI} ^/de/de/campaigns-emea/patientid.html [or]
+	RewriteCond %{REQUEST_URI} ^/es/es/campaigns-emea/patientid.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/campaigns-emea/patientid.html [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/campaigns-emea/patientid.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/campaigns-emea/patientid.html [or]
+	RewriteCond %{REQUEST_URI} ^/gb/en/campaigns-emea/healthcare/mobility.html [or]
+	RewriteCond %{REQUEST_URI} ^/gb/en/campaigns-emea/healthcare/warehouse-management-old.html [or]
+	RewriteCond %{REQUEST_URI} ^/gb/en/campaigns-emea/healthcare/warehouse-management.html [or]
+	RewriteCond %{REQUEST_URI} ^/gb/en/campaigns-emea/healthcare/patient-medical-identification.html [or]
+	RewriteCond %{REQUEST_URI} ^/gb/en/campaigns-emea/healthcare/point-of-care.html [or]
+	RewriteCond %{REQUEST_URI} ^/gb/en/campaigns-emea/healthcare/Laser-and-thermal-medical-wristbands.html [or]
+	RewriteCond %{REQUEST_URI} ^/gb/en/campaigns-emea/healthcare/Enhance-patient-safety-with-barcodes.html [or]
+	RewriteCond %{REQUEST_URI} ^/gb/en/campaigns-emea/healthcare/Medical-mobile-printing-solutions.html [or]
+
+	# MDO-1297
+        RewriteCond %{REQUEST_URI} ^/br/pt/header-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/br/pt/header-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/br/pt/footer-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/la/es/header-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/la/es/footer-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/cn/zh/header-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/cn/zh/footer-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/header-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/footer-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/kr/ko/header-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/kr/ko/footer-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/gb/en/header-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/gb/en/footer-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/header-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/footer-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/es/es/header-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/es/es/footer-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/fr/fr/header-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/fr/fr/footer-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/header-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/footer-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/pl/pl/header-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/pl/pl/footer-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/header-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/footer-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/header-only.html [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/footer-only.html [or]
+
+	# MDO-758
+	RewriteCond %{REQUEST_URI} ^/es/es.html [or]
+	RewriteCond %{REQUEST_URI} ^/es/es/day/solutions.html [or]
+	RewriteCond %{REQUEST_URI} ^/es/es/day/services.html [or]
+	RewriteCond %{REQUEST_URI} ^/es/es/day/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/es/es/day/support-downloads.html [or]
+	RewriteCond %{REQUEST_URI} ^/es/es/day/partners.html [or]
+	RewriteCond %{REQUEST_URI} ^/es/es/day/about-zebra.html [or]
+	RewriteCond %{REQUEST_URI} ^/es/es/day/about-zebra/contact-us.html [or]
+
+	# MDO-789
+        RewriteCond %{REQUEST_URI} ^/it/it.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/day/solutions.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/day/products.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/day/services.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/day/support-downloads.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/day/partners.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/day/about-zebra.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/day/about-zebra/contact-us.html [or]
+
+        # MDO-805
+        RewriteCond %{REQUEST_URI} ^/pl/pl.html [or]
+        RewriteCond %{REQUEST_URI} ^/pl/pl/day/solutions.html [or]
+        RewriteCond %{REQUEST_URI} ^/pl/pl/day/products.html [or]
+        RewriteCond %{REQUEST_URI} ^/pl/pl/day/services.html [or]
+        RewriteCond %{REQUEST_URI} ^/pl/pl/day/support-downloads.html [or]
+        RewriteCond %{REQUEST_URI} ^/pl/pl/day/partners.html [or]
+        RewriteCond %{REQUEST_URI} ^/pl/pl/day/about-zebra.html [or]
+        RewriteCond %{REQUEST_URI} ^/pl/pl/day/about-zebra/contact-us.html [or]
+	# MDO-802
+        RewriteCond %{REQUEST_URI} ^/la/es.html [or]
+        RewriteCond %{REQUEST_URI} ^/la/es/solutions.html [or]
+        RewriteCond %{REQUEST_URI} ^/la/es/services.html [or]
+        RewriteCond %{REQUEST_URI} ^/la/es/support-downloads.html [or]
+        RewriteCond %{REQUEST_URI} ^/la/es/partners.html [or]
+        RewriteCond %{REQUEST_URI} ^/la/es/about-zebra.html [or]
+        RewriteCond %{REQUEST_URI} ^/la/es/about-zebra/contact-us/contact-zebra.html [or]
+
+	# MDO-803
+	RewriteCond %{REQUEST_URI} ^/br/pt.html [or]
+	RewriteCond %{REQUEST_URI} ^/br/pt/solutions.html [or]
+        RewriteCond %{REQUEST_URI} ^/br/pt/services.html [or]
+	RewriteCond %{REQUEST_URI} ^/br/pt/support-downloads.html [or]
+	RewriteCond %{REQUEST_URI} ^/br/pt/partners.html [or]
+	RewriteCond %{REQUEST_URI} ^/br/pt/about-zebra.html [or]
+	RewriteCond %{REQUEST_URI} ^/br/pt/about-zebra/contact-us/contact-zebra.html [or]
+
+	# MDO-851
+        RewriteCond %{REQUEST_URI} ^/ru/ru.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/day/solutions.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/day/products.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/day/services.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/day/support-downloads.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/day/partners.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/day/about-zebra.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/day/about-zebra/contact-us.html [or]
+
+	# MDO-886
+        RewriteCond %{REQUEST_URI} ^/jp/ja.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/day/solutions.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/day/products.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/day/services.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/day/support-downloads.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/day/partners.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/day/about-zebra.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/day/contact-us.html [or]
+	RewriteCond %{REQUEST_URI} ^/jp/ja/day/404-page.html [or]
+
+	# MDO-887
+        RewriteCond %{REQUEST_URI} ^/kr/ko.html [or]
+        RewriteCond %{REQUEST_URI} ^/kr/ko/day/solutions.html [or]
+        RewriteCond %{REQUEST_URI} ^/kr/ko/day/products.html [or]
+        RewriteCond %{REQUEST_URI} ^/kr/ko/day/services.html [or]
+        RewriteCond %{REQUEST_URI} ^/kr/ko/day/support-downloads.html [or]
+        RewriteCond %{REQUEST_URI} ^/kr/ko/day/partners.html [or]
+        RewriteCond %{REQUEST_URI} ^/kr/ko/day/about-zebra.html [or]
+        RewriteCond %{REQUEST_URI} ^/kr/ko/day/contact-us.html [or]
+	RewriteCond %{REQUEST_URI} ^/kr/ko/day/404-page.html [or]
+
+	# MDO-828
+        RewriteCond %{REQUEST_URI} ^/de/de.html [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/solutions.html [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/services.html [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/support-downloads.html [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/partners.html [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/about-zebra.html [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/about-zebra/contact-u.html [or]
+
+	# MDO-885
+        RewriteCond %{REQUEST_URI} ^/tr/tr.html [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/day/solutions.html [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/day/products.html [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/day/services.html [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/day/support-downloads.html [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/day/partners.html [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/day/about-zebra.html [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/day/about-zebra/contact-us.html [or]
+
+	# MDO-829
+	RewriteCond %{REQUEST_URI} ^/fr/fr.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/solutions.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/services.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/support-downloads.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/partners.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/about-zebra.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/about-zebra/contact-us.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/about-zebra/contact-us/contact-zebra.html [or]
+
+	# MDO-907
+	RewriteCond %{REQUEST_URI} ^/cn/zh/how-to-buy.html [or]
+
+	# MDO-954
+	RewriteCond %{REQUEST_URI} ^/es/es/day/solutions/retail-solutions/one-store.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/solutions/retail-solutions/one-store.html [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/day/solutions/retail-solutions/one-store.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/day/solutions/retail-solutions/one-store.html [or]
+        RewriteCond %{REQUEST_URI} ^/pl/pl/day/solutions/retail-solutions/one-store.html [or]
+
+	# MDO-939
+	RewriteCond %{REQUEST_URI} ^/de/de/about-zebra/contact-us/contact-zebra.html [or]
+
+	#MDO-1042
+	RewriteCond %{REQUEST_URI} ^/jp/ja/day/products/featured-products.html [or]
+
+	# Ticket 14812 - cbowers - commenting out exceptions per ticket request.
+	#MDO-1142
+	#DE
+        #RewriteCond %{REQUEST_URI} ^/de/de/cpn/a-to-z-of-wireless/a-to-z-of-wireless-main.html [or]
+        #RewriteCond %{REQUEST_URI} ^/de/de/cpn/a-to-z-of-wireless/a-to-z-of-wireless-hospitality.html [or]
+        #RewriteCond %{REQUEST_URI} ^/de/de/cpn/a-to-z-of-wireless/a-to-z-of-wireless-retail.html [or]
+        #RewriteCond %{REQUEST_URI} ^/de/de/cpn/a-to-z-of-wireless/a-to-z-of-wireless-transportation-logistics.html [or]
+        #RewriteCond %{REQUEST_URI} ^/de/de/cpn/a-to-z-of-wireless/a-to-z-of-wireless-small-medium-business.html [or]
+
+	#FR
+        #RewriteCond %{REQUEST_URI} ^/fr/fr/cpn/a-to-z-of-wireless/a-to-z-of-wireless-main.html [or]
+        #RewriteCond %{REQUEST_URI} ^/fr/fr/cpn/a-to-z-of-wireless/a-to-z-of-wireless-hospitality.html [or]
+        #RewriteCond %{REQUEST_URI} ^/fr/fr/cpn/a-to-z-of-wireless/a-to-z-of-wireless-retail.html [or]
+        #RewriteCond %{REQUEST_URI} ^/fr/fr/cpn/a-to-z-of-wireless/a-to-z-of-wireless-transportation-logistics.html [or]
+        #RewriteCond %{REQUEST_URI} ^/fr/fr/cpn/a-to-z-of-wireless/a-to-z-of-wireless-small-medium-business.html [or]
+
+	#IT
+        #RewriteCond %{REQUEST_URI} ^/it/it/cpn/a-to-z-of-wireless/a-to-z-of-wireless-main.html [or]
+        #RewriteCond %{REQUEST_URI} ^/it/it/cpn/a-to-z-of-wireless/a-to-z-of-wireless-hospitality.html [or]
+        #RewriteCond %{REQUEST_URI} ^/it/it/cpn/a-to-z-of-wireless/a-to-z-of-wireless-retail.html [or]
+        #RewriteCond %{REQUEST_URI} ^/it/it/cpn/a-to-z-of-wireless/a-to-z-of-wireless-transportation-logistics.html [or]
+        #RewriteCond %{REQUEST_URI} ^/it/it/cpn/a-to-z-of-wireless/a-to-z-of-wireless-small-medium-business.html [or]
+
+	#MDO-1211
+	RewriteCond %{REQUEST_URI} ^/de/de/resource-library/success-stories/RETIF-success-story.html [or]
+	RewriteCond %{REQUEST_URI} ^/de/de/resource-library/success-stories/c-s-wholesale-grocers-success-story.html [or]
+	RewriteCond %{REQUEST_URI} ^/de/de/resource-library/success-stories/troy-design-success-story.html [or]
+
+	RewriteCond %{REQUEST_URI} ^/pl/pl/resource-library/success-stories/RETIF-success-story.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/resource-library/success-stories/c-s-wholesale-grocers-success-story.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/resource-library/success-stories/troy-design-success-story.html [or]
+
+	RewriteCond %{REQUEST_URI} ^/es/es/resource-library/success-stories/RETIF-success-story.html [or]
+	RewriteCond %{REQUEST_URI} ^/es/es/resource-library/success-stories/c-s-wholesale-grocers-success-story.html [or]
+	RewriteCond %{REQUEST_URI} ^/es/es/resource-library/success-stories/troy-design-success-story.html [or]
+
+	#MDO-1259
+	#FR
+        RewriteCond %{REQUEST_URI} ^/fr/fr/resource-library/success-stories/RETIF-success-story.html [or]
+        RewriteCond %{REQUEST_URI} ^/fr/fr/resource-library/success-stories/c-s-wholesale-grocers-success-story.html [or]
+        RewriteCond %{REQUEST_URI} ^/fr/fr/resource-library/success-stories/troy-design-success-story.html [or]
+
+	#IT
+        RewriteCond %{REQUEST_URI} ^/it/it/resource-library/success-stories/RETIF-success-story.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/resource-library/success-stories/c-s-wholesale-grocers-success-story.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/resource-library/success-stories/troy-design-success-story.html [or]
+
+	#MDO-1266
+	RewriteCond %{REQUEST_URI} ^/de/de/cpn/warehouse-solutions.html [or]
+	RewriteCond %{REQUEST_URI} ^/es/es/cpn/warehouse-solutions.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/cpn/warehouse-solutions.html [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/cpn/warehouse-solutions.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/cpn/warehouse-solutions.html [or]
+	RewriteCond %{REQUEST_URI} ^/ru/ru/cpn/warehouse-solutions.html [or]
+	RewriteCond %{REQUEST_URI} ^/tr/tr/cpn/warehouse-solutions.html [or]
+
+	#MDO-1430
+	RewriteCond %{REQUEST_URI} ^/it/it/products/tablets.html [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/products/tablets/et1.html [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/products/tablets/et1/et1-spec-sheet-en.html [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/products/tablets/et50-55.html [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/products/tablets/et50-55/et50-et55-windows-spec-sheet-en.html [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/products/tablets/et50-55/et50-et55-android-spec-sheet-en.html [or]
+
+	# MDO-1451
+        RewriteCond %{REQUEST_URI} ^/de/de/products/mobile-computers/handheld/tc8000.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/products/mobile-computers/handheld/tc8000.html [or]
+        RewriteCond %{REQUEST_URI} ^/fr/fr/products/mobile-computers/handheld/tc8000.html [or]
+        RewriteCond %{REQUEST_URI} ^/es/es/products/mobile-computers/handheld/tc8000.html [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/products/mobile-computers/handheld/tc8000.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/mobile-computers/handheld/tc8000.html [or]
+        RewriteCond %{REQUEST_URI} ^/pl/pl/products/mobile-computers/handheld/tc8000.html [or]
+
+	#MDO-1465
+	RewriteCond %{REQUEST_URI} ^/gb/en/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/de/de/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/la/es/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/tr/tr/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/ru/ru/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/br/pt/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/kr/ko/products.html [or]
+
+	#MDO-1476
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/mobile-computers/handheld/tc8000.html [or]
+	RewriteCond %{REQUEST_URI} ^/la/es/products/mobile-computers/handheld/tc8000.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/mobile-computers/handheld/tc8000.html [or]
+	RewriteCond %{REQUEST_URI} ^/kr/ko/products/mobile-computers/handheld/tc8000.html [or]
+
+	# MDO-1478 Exceptions
+	RewriteCond %{REQUEST_URI} ^/la/es/services/(.*) [or]
+	RewriteCond %{REQUEST_URI} ^/br/pt/services/(.*) [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/tablets.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/tablets/(.*) [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/(.*) [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/products/rfid.html [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/products/rfid/(.*) [or]
+	RewriteCond %{REQUEST_URI} ^/tr/tr/products/rfid.html [or]
+	RewriteCond %{REQUEST_URI} ^/tr/tr/products/rfid/(.*) [or]
+	RewriteCond %{REQUEST_URI} ^/ru/ru/products/rfid.html [or]
+	RewriteCond %{REQUEST_URI} ^/ru/ru/products/rfid/(.*) [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/support-downloads.html [or]
+	RewriteCond %{REQUEST_URI} ^/es/es/support-downloads.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/support-downloads.html [or]
+	RewriteCond %{REQUEST_URI} ^/de/de/support-downloads.html [or]
+	RewriteCond %{REQUEST_URI} ^/it/it/support-downloads.html [or]
+	RewriteCond %{REQUEST_URI} ^/ru/ru/support-downloads.html [or]
+	RewriteCond %{REQUEST_URI} ^/tr/tr/support-downloads.html [or]
+
+	# MDO-1466
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-handhelds.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-handhelds/mc3190-z-handheld-rfid-reader.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-handhelds/mc9190-z-rfid.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-handhelds/rfd5500.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-handhelds/rfd8500.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-readers.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-readers/fx7500.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-readers/fx9500.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-reader-antennas.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-reader-antennas/an440.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-reader-antennas/an480.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-reader-antennas/an610.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-reader-antennas/an620.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-reader-antennas/an710.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/rfid/rfid-reader-antennas/an720.html [or]
+
+        #MDO-1478 services exception
+	RewriteCond %{REQUEST_URI} ^/cn/zh/services.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/solutions.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/services/(.*)$ [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/support-downloads.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/partners.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/about-zebra.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/about-zebra/contact-us.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/about-zebra/contact-us/contact-zebra.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/gk888.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/gk888/gk888d-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/gk888/gk888t-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zt210-series.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zt210-series/zt210-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zt210-series/zt230-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/ez320-mobile-printer.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/ez320-mobile-printer/ez320-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/gt800.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/gt800/gt800-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/gt800/gt820-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zxp-series-3c.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zxp-series-3c/zxp-series-3c-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zr128.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zr128/zr128-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zr338.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zr338/zr338-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zr600-series.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zr600-series/zr638-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zr600-series/zr628-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zr600-series-hc.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zr600-series-hc/zr638-hc-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zr600-series-hc/zr628-hc-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zxp-series-7c.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/zxp-series-7c/zxp-series-7c-support.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/china-exclusive-products/mc36.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/chinese-terms-conditions.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/support-downloads/eula.html [or]
+
+	# MDO-1514
+        RewriteCond %{REQUEST_URI} ^/tr/tr/products/mobile-computers/wearable-computers.html [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/products/mobile-computers/wearable-computers/(.*)$ [or]
+
+        # MDO-1515
+        RewriteCond %{REQUEST_URI} ^/de/de/products/mobile-computers/wearable-computers.html [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/products/mobile-computers/wearable-computers/(.*)$ [or]
+
+        # MDO-1518
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products/mobile-computers/wearable-computers.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products/mobile-computers/wearable-computers/(.*)$ [or]
+
+        # MDO-1516
+        RewriteCond %{REQUEST_URI} ^/de/de/products/tablets.html [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/products/tablets/(.*)$ [or]
+
+        # MDO-1527
+        RewriteCond %{REQUEST_URI} ^/it/it/products/mobile-computers/wearable-computers.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/products/mobile-computers/wearable-computers/(.*)$ [or]
+
+        # WEB-4210
+        RewriteCond %{REQUEST_URI} ^/fr/fr/products/mobile-computers/wearable-computers.html [or]
+        RewriteCond %{REQUEST_URI} ^/fr/fr/products/mobile-computers/wearable-computers/(.*) [or]
+
+        # WEB-4744
+        RewriteCond %{REQUEST_URI} ^/es/es/products/mobile-computers/wearable-computers.html [or]
+        RewriteCond %{REQUEST_URI} ^/es/es/products/mobile-computers/wearable-computers/(.*) [or]
+
+        # WEB-4746
+        RewriteCond %{REQUEST_URI} ^/it/it/products/scanners/general-purpose-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/products/scanners/general-purpose-scanners/(.*) [or]
+
+        # WEB-4749
+        RewriteCond %{REQUEST_URI} ^/it/it/products/scanners/fixed-mount-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/products/scanners/fixed-mount-scanners/(.*) [or]
+
+        # WEB-4750
+        RewriteCond %{REQUEST_URI} ^/br/pt/products/scanners/fixed-mount-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/br/pt/products/scanners/fixed-mount-scanners/(.*) [or]
+
+        # WEB-4707
+        RewriteCond %{REQUEST_URI} ^/cn/zh/products/tablets.html [or]
+        RewriteCond %{REQUEST_URI} ^/cn/zh/products/tablets/(.*) [or]
+
+        # WEB-4747
+        RewriteCond %{REQUEST_URI} ^/es/es/products/scanners/fixed-mount-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/es/es/products/scanners/fixed-mount-scanners/(.*) [or]
+
+        # WEB-4702
+        RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/fixed-mount-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/fixed-mount-scanners/(.*) [or]
+
+        # WEB-4754
+        RewriteCond %{REQUEST_URI} ^/pl/pl/products/scanners/fixed-mount-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/pl/pl/products/scanners/fixed-mount-scanners/(.*) [or]
+
+        # WEB-4748
+        RewriteCond %{REQUEST_URI} ^/tr/tr/products/scanners/fixed-mount-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/products/scanners/fixed-mount-scanners/(.*) [or]
+
+        # MDO-1530
+        RewriteCond %{REQUEST_URI} ^/de/de/solutions/manufacturing-solutions/udi-solution.html [or]
+
+        # WEB-4742
+        RewriteCond %{REQUEST_URI} ^/es/es/products/scanners/general-purpose-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/es/es/products/scanners/general-purpose-scanners/(.*) [or]
+
+        # MDO-1512
+        RewriteCond %{REQUEST_URI} ^/br/pt/products/mobile-computers/wearable-computers.html [or]
+        RewriteCond %{REQUEST_URI} ^/br/pt/products/mobile-computers/wearable-computers/(.*) [or]
+
+        # WEB-4793
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/mobile-computers/wearable-computers.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/mobile-computers/wearable-computers/(.*) [or]
+
+        # WEB-4758
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/tablets.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/tablets/(.*) [or]
+
+        # WEB-4825
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/general-purpose-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/general-purpose-scanners/(.*) [or]
+
+        # WEB-4888
+        RewriteCond %{REQUEST_URI} ^/es/es/products/rfid.html [or]
+        RewriteCond %{REQUEST_URI} ^/es/es/products/rfid/(.*) [or]
+
+        # WEB-4916
+        RewriteCond %{REQUEST_URI} ^/es/es/products/tablets.html [or]
+        RewriteCond %{REQUEST_URI} ^/es/es/products/tablets/(.*) [or]
+
+	# CON-2921
+	RewriteCond %{REQUEST_URI} ^/cn/zh/contact-zebra.html [or]
+
+        # WEB-4205
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/scanners/fixed-mount-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/scanners/fixed-mount-scanners/(.*) [or]
+
+        # WEB-4345
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/scanners/general-purpose-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/scanners/general-purpose-scanners/(.*) [or]
+
+        # WEB-3705
+        RewriteCond %{REQUEST_URI} ^/it/it/products/rfid.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/products/rfid/(.*) [or]
+
+        # WEB-3713
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/rfid.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/rfid/(.*) [or]
+
+        # WEB-4373
+        RewriteCond %{REQUEST_URI} ^/de/de/products/scanners/fixed-mount-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/products/scanners/fixed-mount-scanners/(.*) [or]
+
+        # WEB-4350
+        RewriteCond %{REQUEST_URI} ^/tr/tr/products/scanners/general-purpose-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/products/scanners/general-purpose-scanners/(.*) [or]
+
+        # WEB-4219
+        RewriteCond %{REQUEST_URI} ^/br/pt/products/tablets.html [or]
+        RewriteCond %{REQUEST_URI} ^/br/pt/products/tablets/(.*) [or]
+
+	# WEB-4995
+	RewriteCond %{REQUEST_URI} ^/de/de/products/rfid.html [or]
+	RewriteCond %{REQUEST_URI} ^/de/de/products/rfid/(.*)$ [or]
+
+	# WEB-4176
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/rfid.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/rfid/(.*) [or]
+
+	# WEB-3721
+	RewriteCond %{REQUEST_URI} ^/tr/tr/products/tablets.html [or]
+	RewriteCond %{REQUEST_URI} ^/tr/tr/products/tablets/(.*) [or]
+
+	# WEB-5026 Rhino launch
+	# 9 Combined langugages incl.: la_es, fr_fr, de_de, it_it, tr_tr, es_es, ru_ru, pl_pl, & br_pt
+	RewriteCond %{REQUEST_URI} ^/(la/es|fr/fr|de/de|it/it|tr/tr|es/es|ru/ru|pl/pl|br/pt)/products.html [or]
+	RewriteCond %{REQUEST_URI} ^/(la/es|fr/fr|de/de|it/it|tr/tr|es/es|ru/ru|pl/pl|br/pt)/products/scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/(la/es|fr/fr|de/de|it/it|tr/tr|es/es|ru/ru|pl/pl|br/pt)/products/scanners/ultra-rugged-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/(la/es|fr/fr|de/de|it/it|tr/tr|es/es|ru/ru|pl/pl|br/pt)/products/scanners/ultra-rugged-scanners/(.*) [or]
+	RewriteCond %{REQUEST_URI} ^/(la/es|fr/fr|de/de|it/it|tr/tr|es/es|ru/ru|pl/pl|br/pt)/products/accessories/barcode-scanner/batteries-and-battery-accessories.html [or]
+
+	# WEB-4651 Partner
+        RewriteCond %{REQUEST_URI} ^/(pl/pl|ru/ru|it/it|tr/tr|es/es|la/es|br/pt|jp/ja|kr/ko|cn/zh|de/de|fr/fr)/locator.html [or]
+        RewriteCond %{REQUEST_URI} ^/(pl/pl|ru/ru|it/it|tr/tr|es/es|la/es|br/pt|jp/ja|kr/ko|cn/zh|de/de|fr/fr)/partners/find-a-partner.html [or]
+
+	# WEB-5311 5307 5308 5310 5309 5180 5049 5696 5697
+	RewriteCond %{REQUEST_URI} ^/(es/es|it/it|pl/pl|tr/tr|ru/ru|de/de|fr/fr|la/es|br/pt)/products/printers/desktop.html [or]
+	RewriteCond %{REQUEST_URI} ^/(es/es|it/it|pl/pl|tr/tr|ru/ru|de/de|fr/fr|la/es|br/pt)/products/printers/desktop/(.*) [or]
+
+	# WEB-5285 5562 5644 5343 4996 5372 5292
+        RewriteCond %{REQUEST_URI} ^/(br/pt|fr/fr|pl/pl|ru/ru|de/de|es/es|tr/tr|it/it|la/es)/products/mobile-computers/handheld.html [or]
+        RewriteCond %{REQUEST_URI} ^/(br/pt|fr/fr|pl/pl|ru/ru|de/de|es/es|tr/tr|it/it|la/es)/products/mobile-computers/handheld/(.*) [or]
+
+	#WEB-4984
+        RewriteCond %{REQUEST_URI} ^/es/es/services.html [or]
+        RewriteCond %{REQUEST_URI} ^/es/es/services/(.*) [or]
+
+	#WEB-5116
+        RewriteCond %{REQUEST_URI} ^/cn/zh/products/interactive-kiosks.html [or]
+        RewriteCond %{REQUEST_URI} ^/cn/zh/products/interactive-kiosks/(.*) [or]
+
+	#WEB-5539 5493 5597 5424
+        RewriteCond %{REQUEST_URI} ^/(cn/zh|la/es|tr/tr|pl/pl|es/es|it/it|de/de|ru/ru|fr/fr|br/pt)/products/mobile-computers/narrowband-digital-wireless.html [or]
+	RewriteCond %{REQUEST_URI} ^/(cn/zh|la/es|tr/tr|pl/pl|es/es|it/it|ru/ru|de/de|fr/fr|br/pt)/products/mobile-computers/narrowband-digital-wireless/(.*) [or]
+
+	#WEB-5544 5441
+        RewriteCond %{REQUEST_URI} ^/(br/pt|la/es|tr/tr|pl/pl|it/it|ru/ru|de/de|fr/fr|es/es)/products/mobile-computers/vehicle-mounted.html [or]
+        RewriteCond %{REQUEST_URI} ^/(br/pt|la/es|tr/tr|pl/pl|it/it|ru/ru|de/de|fr/fr|es/es)/products/mobile-computers/vehicle-mounted/(.*) [or]
+
+	#WEB-5611
+        RewriteCond %{REQUEST_URI} ^/(kr/ko|cn/zh)/products.html [or]
+        RewriteCond %{REQUEST_URI} ^/(kr/ko|cn/zh)/products/scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/(kr/ko|cn/zh)/products/scanners/ultra-rugged-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/(kr/ko|cn/zh)/products/accessories/barcode-scanner/batteries-and-battery-accessories.html [or]
+        RewriteCond %{REQUEST_URI} ^/(kr/ko|cn/zh)/products/scanners/ultra-rugged-scanners/(.*) [or]
+
+	#WEB-5828 5835
+ 	RewriteCond %{REQUEST_URI} ^/(cn/zh|la/es|br/pt|fr/fr|es/es|de/de|tr/tr|pl/pl|it/it|ru/ru)/products/scanners/companion-scanners.html  [or]
+ 	RewriteCond %{REQUEST_URI} ^/(cn/zh|la/es|br/pt|fr/fr|es/es|de/de|tr/tr|pl/pl|it/it|ru/ru)/products/scanners/companion-scanners/(.*)  [or]
+
+	#WEB-6041 6048 5832
+        RewriteCond %{REQUEST_URI} ^/(br/pt|pl/pl|la/es|cn/zh)/products/mobile-computers/wearable-computers.html [or]
+        RewriteCond %{REQUEST_URI} ^/(br/pt|pl/pl|la/es|cn/zh)/products/mobile-computers/wearable-computers/(.*) [or]
+
+	# WEB-6065
+        RewriteCond %{REQUEST_URI} ^/fr/fr/products/scanners/fixed-mount-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/fr/fr/products/scanners/fixed-mount-scanners/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/(it/it|fr/fr|de/de)/solutions/manufacturing-solutions/2020/track-and-trace.html [or]
+
+	# WEB-6105, 6106, 6108, 6107, 6112, 6111, 6110, 6109
+        RewriteCond %{REQUEST_URI} ^/(it/it|fr/fr|ru/ru|pl/pl|br/pt|tr/tr|es/es|de/de)/products/scanners/healthcare-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/(it/it|fr/fr|ru/ru|pl/pl|br/pt|tr/tr|es/es|de/de)/products/scanners/healthcare-scanners/(.*) [or]
+
+	# Ticket 14656 - rewrite rules for Japan
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/ultra-rugged-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products/accessories/barcode-scanner/batteries-and-battery-accessories.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/ultra-rugged-scanners/(.*) [or]
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/ultra-rugged-scanners/$1 [or]
+
+	# MDO-949
+	RewriteCond %{REQUEST_URI} ^/de/de/solutions/retail-solutions/one-store.html [or]
+
+	# WEB-5873
+        RewriteCond %{REQUEST_URI} ^/cn/zh/products/mobile-computers/handheld.html [or]
+        RewriteCond %{REQUEST_URI} ^/cn/zh/products/mobile-computers/handheld/(.*) [or]
+
+        # Ticket 14653 - new exception request
+        RewriteCond %{REQUEST_URI} ^/cn/zh/products/mobile-computers/vehicle-mounted.html [or]
+        RewriteCond %{REQUEST_URI} ^/cn/zh/products/mobile-computers/vehicle-mounted/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/la/es/products/tablets.html [or]
+        RewriteCond %{REQUEST_URI} ^/la/es/products/tablets/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/fr/fr/products/tablets.html [or]
+        RewriteCond %{REQUEST_URI} ^/fr/fr/products/tablets/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/br/pt/products/scanners/multi-plane-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/br/pt/products/scanners/multi-plane-scanners/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/la/es/products/scanners/multi-plane-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/la/es/products/scanners/multi-plane-scanners/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^es/es/products/scanners/imagers.html [or]
+        RewriteCond %{REQUEST_URI} ^es/es/products/scanners/imagers/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/products/scanners/multi-plane-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/tr/tr/products/scanners/multi-plane-scanners/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/products/scanners/imagers.html [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/products/scanners/imagers/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/products/scanners/multi-plane-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/products/scanners/multi-plane-scanners/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/scanners/multi-plane-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/scanners/multi-plane-scanners/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/fr/fr/products/scanners/multi-plane-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/fr/fr/products/scanners/multi-plane-scanners/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/products/scanners/multi-plane-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/de/de/products/scanners/multi-plane-scanners/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/es/es/products/scanners/multi-plane-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/es/es/products/scanners/multi-plane-scanners/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/products/scanners/imagers.html [or]
+        RewriteCond %{REQUEST_URI} ^/it/it/products/scanners/imagers/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/pl/pl/products/scanners/imagers.html  [or]
+        RewriteCond %{REQUEST_URI} ^/pl/pl/products/scanners/imagers/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/scanners/imagers.html [or]
+        RewriteCond %{REQUEST_URI} ^/ru/ru/products/scanners/imagers/(.*) [or]
+        RewriteCond %{REQUEST_URI} ^/la/es/products/scanners/healthcare-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/fr/fr/products/scanners/imagers.html [or]
+        RewriteCond %{REQUEST_URI} ^/fr/fr/products/scanners/imagers/(.*) [or]
+
+        # Ticket 14692 - new exception request
+        RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/multi-plane-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/multi-plane-scanners/(.*) [or]
+
+	# Ticket 14731 - cbowers - new exception request
+        RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|pl/pl|la/es|it/it|br/pt|ru/ru|tr/tr|jp/ja)/products/software/mobile-computers/tekspeech-pro.html [or]
+        RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|pl/pl|la/es|it/it|br/pt|ru/ru|tr/tr|jp/ja)/products/software/mobile-computers/tekspeech-pro/(.*) [or]
+
+        RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|pl/pl|la/es|it/it|br/pt|ru/ru|tr/tr|jp/ja)/products/software/mobile-computers/datawedge.html [or]
+        RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|pl/pl|la/es|it/it|br/pt|ru/ru|tr/tr|jp/ja)/products/software/mobile-computers/datawedge/(.*) [or]
+
+        RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|pl/pl|la/es|it/it|br/pt|ru/ru|tr/tr|jp/ja)/products/software/mobile-computers/enterprise-keyboard.html [or]
+        RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|pl/pl|la/es|it/it|br/pt|ru/ru|tr/tr|jp/ja)/products/software/mobile-computers/enterprise-keyboard/(.*) [or]
+
+        RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|pl/pl|la/es|it/it|br/pt|ru/ru|tr/tr|jp/ja)/products/software/mobile-computers/mobile-app-utilities/emdk-for-android.html [or]
+        RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|pl/pl|la/es|it/it|br/pt|ru/ru|tr/tr|jp/ja)/products/software/mobile-computers/mobile-app-utilities/emdk-for-android/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/fr/fr/products/mobile-computers.html [or]
+        RewriteCond %{REQUEST_URI} ^/fr/fr/products/mobile-computers/(.*)$ [or]
+
+	# Ticket 14813 - cbowers - Adding exception below
+	RewriteCond %{REQUEST_URI} ^/(pl/pl|br/pt|la/es|de/de|fr/fr|it/it|es/es|ru/ru)/about-zebra/newsroom/press-releases/2016/zebras-total-wearable-solutions-deliver-double-digit-productivity-gains.html [or]
+
+	# Ticket 14841 - adey - Adding exception below
+        RewriteCond %{REQUEST_URI} ^/(tr/tr|br/pt|la/es|cn/zh|es/es)/products/scanners/imagers.html [or]
+	RewriteCond %{REQUEST_URI} ^/(tr/tr|br/pt|la/es|cn/zh|es/es)/products/scanners/imagers/(.*) [or]
+	
+	RewriteCond %{REQUEST_URI} ^/la/es/products/scanners/fixed-mount-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/la/es/products/scanners/fixed-mount-scanners/(.*) [or]
+	
+	RewriteCond %{REQUEST_URI} ^/de/de/products/scanners/general-purpose-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/de/de/products/scanners/general-purpose-scanners/(.*) [or]
+	
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/scanners/multi-plane-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/scanners/multi-plane-scanners/(.*) [or]
+	
+	RewriteCond %{REQUEST_URI} ^/la/es/products/scanners/healthcare-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/la/es/products/scanners/healthcare-scanners/(.*) [or]
+	
+	RewriteCond %{REQUEST_URI} ^/de/de/products/scanners/rugged-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/de/de/products/scanners/rugged-scanners/(.*) [or]
+	
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/printers/desktop/compact-desktop-printers.html [or]
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/printers/desktop/ribbon-cartridge-desktop-printers.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/support-downloads/industrial/zt210.html [or]
+
+	# Ticket 14924 - ldavis - Adding exceptions below - 20160718
+	RewriteCond %{REQUEST_URI} ^/fr/fr/products/scanners/rugged-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/products/scanners/rugged-scanners/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/healthcare-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/healthcare-scanners/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/la/es/products/scanners/general-purpose-scanners.html [or] 
+	RewriteCond %{REQUEST_URI} ^/la/es/products/scanners/general-purpose-scanners/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/fr/fr/products/scanners/general-purpose-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/fr/fr/products/scanners/general-purpose-scanners/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/scanners/general-purpose-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/scanners/general-purpose-scanners/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/scanners/rugged-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/pl/pl/products/scanners/rugged-scanners/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/la/es/products/scanners/rugged-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/la/es/products/scanners/rugged-scanners/(.*) [or]
+
+	# Ticket 14907 - adey - Adding exception below
+	# Updated by Marvin - 20160716
+
+	RewriteCond %{REQUEST_URI} ^/cn/zh/cpn/visibility.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/cpn/visibility/(.*) [or]
+	RewriteCond %{REQUEST_URI} ^/jp/ja/cpn/visibility.html [or]
+	RewriteCond %{REQUEST_URI} ^/jp/ja/cpn/visibility/(.*) [or]
+
+	# Ticket 14992 - adey - Adding exception below
+        RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|it/it)/products/interactive-kiosks.html [or]
+	RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|it/it)/products/interactive-kiosks/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/br/pt/products/scanners/general-purpose-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/br/pt/products/scanners/general-purpose-scanners/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/(de/de|fr/fr|pl/pl|ru/ru)/products/printers/mobile.html [or]
+	RewriteCond %{REQUEST_URI} ^/(de/de|fr/fr|pl/pl|ru/ru)/products/printers/mobile/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/(fr/fr|de/de|es/es|tr/tr|pl/pl|ru/ru|it/it)/cpn/visibility.html [or]
+	RewriteCond %{REQUEST_URI} ^/(fr/fr|de/de|es/es|tr/tr|pl/pl|ru/ru|it/it)/cpn/visibility/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|pl/pl|it/it|ru/ru)/products/printers/industrial.html [or]
+	RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|pl/pl|it/it|ru/ru)/products/printers/industrial/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/(es/es|ru/ru|tr/tr|it/it|fr/fr|pl/pl)/products/printers/print-engines.html [or]
+	RewriteCond %{REQUEST_URI} ^/(es/es|ru/ru|tr/tr|it/it|fr/fr|pl/pl)/products/printers/print-engines/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/(it/it|es/es|jp/ja)/products/scanners/rugged-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/(it/it|es/es|jp/ja)/products/scanners/rugged-scanners/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|it/it)/products/printers/rfid.html [or]  	
+	RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|it/it)/products/printers/rfid/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/(ru/ru|pl/pl|de/de|fr/fr|jp/ja|tr/tr|es/es)/products/software/mobile-computers/mobility-dna.html [or]
+
+	RewriteCond %{REQUEST_URI} ^/(ru/ru|pl/pl|br/pt|la/es|de/de|fr/fr|jp/ja|tr/tr|it/it|es/es)/products/software/mobile-computers/enterprise-mobility-management.html [or]
+
+	RewriteCond %{REQUEST_URI} ^/jp/ja/support-downloads.html [or]
+
+	# ticket 15059 - cbowers - 20160729
+	RewriteCond %{REQUEST_URI} ^/(br/pt|la/es)/cpn/visibility.html [or]
+   	RewriteCond %{REQUEST_URI} ^/(br/pt|la/es)/cpn/visibility/(.*) [or]
+
+	# Ticket 15064 - adey - Adding exceptions below
+	RewriteCond %{REQUEST_URI} ^/(pl/pl|ru/ru|tr/tr|la/es|br/pt)/products/printers/rfid.html [or]
+	RewriteCond %{REQUEST_URI} ^/(pl/pl|ru/ru|tr/tr|la/es|br/pt)/products/printers/rfid/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/(br/pt|tr/tr|ru/ru|cn/zh)/products/scanners/rugged-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/(br/pt|tr/tr|ru/ru|cn/zh)/products/scanners/rugged-scanners/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/(es/es|it/it|tr/tr|br/pt|la/es)/products/printers/mobile.html [or]
+	RewriteCond %{REQUEST_URI} ^/(es/es|it/it|tr/tr|br/pt|la/es)/products/printers/mobile/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/tr/tr/products/printers/industrial.html [or]
+	RewriteCond %{REQUEST_URI} ^/tr/tr/products/printers/industrial/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/(de/de|br/pt|la/es)/products/printers/print-engines.html [or]
+	RewriteCond %{REQUEST_URI} ^/(de/de|br/pt|la/es)/products/printers/print-engines/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/br/pt/products/rfid.html [or]
+	RewriteCond %{REQUEST_URI} ^/br/pt/products/rfid/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/(es/es|fr/fr|ru/ru|pl/pl|it/it|tr/tr|de/de|br/pt|la/es)/products/printers/card.html [or]
+	RewriteCond %{REQUEST_URI} ^/(es/es|fr/fr|ru/ru|pl/pl|it/it|tr/tr|de/de|br/pt|la/es)/products/printers/card/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/(pl/pl|ru/ru|tr/tr|jp/ja|br/pt)/products/interactive-kiosks.html [or]
+	RewriteCond %{REQUEST_URI} ^/(pl/pl|ru/ru|tr/tr|jp/ja|br/pt)/products/interactive-kiosks/(.*) [or]
+
+	RewriteCond %{REQUEST_URI} ^/(br/pt|la/es|de/de|es/es|fr/fr|it/it|pl/pl|ru/ru|tr/tr)/products/printers/kiosk.html [or]
+	RewriteCond %{REQUEST_URI} ^/(br/pt|la/es|de/de|es/es|fr/fr|it/it|pl/pl|ru/ru|tr/tr)/products/printers/kiosk/kr200-series.html [or]
+	RewriteCond %{REQUEST_URI} ^/(br/pt|la/es|de/de|es/es|fr/fr|it/it|pl/pl|ru/ru|tr/tr)/products/printers/kiosk/kr400-series.html [or]
+
+	# Ticket 15101 - adding exceptions below - cbowers - 20160802
+	RewriteCond %{REQUEST_URI} ^/(br/pt|la/es)/products/printers/industrial.html [or]
+	RewriteCond %{REQUEST_URI} ^/(br/pt|la/es)/products/printers/industrial/(.*) [or]
+	RewriteCond %{REQUEST_URI} ^/(la/es|br/pt|de/de|es/es|fr/fr|it/it|pl/pl|ru/ru|tr/tr)/products/printers.html [or]
+
+	# Ticket 15157 - adding new exceptions below - cbowers - 20160808
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/tablets.html [or]
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/tablets/(.*) [or]
+
+	# Ticket 15268 - adding new exceptions - cbowers - 20160815
+	RewriteCond %{REQUEST_URI} ^/kr/ko/products/mobile-computers/narrowband-digital-wireless.html  [or] 
+	RewriteCond %{REQUEST_URI} ^/kr/ko/products/mobile-computers/narrowband-digital-wireless/(.*) [or] 
+
+	RewriteCond %{REQUEST_URI} ^/(de/de|fr/fr|it/it|es/es|pl/pl|ru/ru|tr/tr|la/es|br/pt|kr/ko|jp/ja|cn/zh)/about-zebra/newsroom.html  [or] 
+	RewriteCond %{REQUEST_URI} ^/(de/de|fr/fr|it/it|es/es|pl/pl|ru/ru|tr/tr|la/es|br/pt|kr/ko|jp/ja|cn/zh)/about-zebra/newsroom/press-releases.html  [or] 
+	RewriteCond %{REQUEST_URI} ^/(de/de|fr/fr|it/it|es/es|pl/pl|ru/ru|tr/tr|la/es|br/pt|kr/ko|jp/ja|cn/zh)/about-zebra/newsroom/press-releases/2016/(.*)  [or] 
+	RewriteCond %{REQUEST_URI} ^/(de/de|fr/fr|it/it|es/es|pl/pl|ru/ru|tr/tr|la/es|br/pt|kr/ko|jp/ja|cn/zh)/about-zebra/newsroom/press-releases/2015/(.*)  [or] 
+	RewriteCond %{REQUEST_URI} ^/(de/de|fr/fr|it/it|es/es|pl/pl|ru/ru|tr/tr|la/es|br/pt|kr/ko|jp/ja|cn/zh)/about-zebra/newsroom/press-releases/2014/(.*)  [or] 
+	RewriteCond %{REQUEST_URI} ^/(de/de|fr/fr|it/it|es/es|pl/pl|ru/ru|tr/tr|la/es|br/pt|kr/ko|jp/ja|cn/zh)/about-zebra/newsroom/press-releases/2013/(.*)  [or] 
+	RewriteCond %{REQUEST_URI} ^/(de/de|fr/fr|it/it|es/es|pl/pl|ru/ru|tr/tr|la/es|br/pt|kr/ko|jp/ja|cn/zh)/about-zebra/newsroom/press-releases/2012/(.*) [or] 
+ 
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/printers.html  [or] 
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/printers/(.*) [or] 
+
+	RewriteCond %{REQUEST_URI} ^/la/es/products/interactive-kiosks.html  [or] 
+	RewriteCond %{REQUEST_URI} ^/la/es/products/interactive-kiosks/(.*) [or] 
+
+	RewriteCond %{REQUEST_URI} ^/(fr/fr|la/es)/products/rfid.html  [or] 
+	RewriteCond %{REQUEST_URI} ^/(fr/fr|la/es)/products/rfid/(.*) [or] 
+ 
+	RewriteCond %{REQUEST_URI} ^/(la/es|br/pt|de/de|es/es|fr/fr|it/it|pl/pl|ru/ru|tr/tr)/products/supplies.html  [or] 
+	RewriteCond %{REQUEST_URI} ^/(la/es|br/pt|de/de|es/es|fr/fr|it/it|pl/pl|ru/ru|tr/tr)/products/supplies/(.*) [or] 
+ 
+	RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|it/it|pl/pl|ru/ru|tr/tr|la/es|br/pt|jp/ja)/products/oem.html  [or] 
+	RewriteCond %{REQUEST_URI} ^/(de/de|es/es|fr/fr|it/it|pl/pl|ru/ru|tr/tr|la/es|br/pt|jp/ja)/products/oem/(.*) [or] 
+
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/mobile-computers.html  [or] 
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/mobile-computers/(.*) [or] 
+
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/multi-plane-scanners.html  [or] 
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/multi-plane-scanners/(.*) [or] 
+
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/fixed-mount-scanners.html  [or] 
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/fixed-mount-scanners/(.*) [or] 
+
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/imagers.html  [or] 
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/imagers/(.*) [or] 
+
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/companion-scanners.html  [or] 
+	RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/companion-scanners/(.*) [or]
+
+        # Ticket 15287 - adding new exceptions - bdichter 20160815
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products/supplies.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products/supplies/(.*) [or]
+
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/healthcare-scanners.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products/scanners/healthcare-scanners/(.*) [or]
+
+        # Ticket 15349 - additional exceptions - bdichter 20160820
+        RewriteCond %{REQUEST_URI} ^/kr/ko/cpn/visibility.html [or]
+        RewriteCond %{REQUEST_URI} ^/kr/ko/cpn/visibility/(.*) [or]
+
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products/rfid.html [or]
+        RewriteCond %{REQUEST_URI} ^/jp/ja/products/rfid/(.*) [or]
+
+	# Ticket 15432 - Adding exceptions below - adey - 20160829
+	RewriteCond %{REQUEST_URI} ^/(pl/pl|it/it|tr/tr|ru/ru|fr/fr|de/de|es/es)/products/networks/wireless-lan/wlan-products/access-points.html [or]
+	RewriteCond %{REQUEST_URI} ^/(pl/pl|it/it|tr/tr|ru/ru|fr/fr|de/de|es/es)/products/networks/wireless-lan/wlan-products/access-points/ap-8432.html [or]
+	RewriteCond %{REQUEST_URI} ^/(pl/pl|it/it|tr/tr|ru/ru|fr/fr|de/de|es/es)/products/networks/wireless-lan/wlan-products/access-points/ap-8533.html [or]
+	RewriteCond %{REQUEST_URI} ^/(de/de|fr/fr|it/it|es/es|pl/pl|ru/ru|la/es|br/pt|jp/ja)/products/printers/rfid/on-metal-rfid-label-solution.html [or]
+
+	# Ticket 15519 - Adding exceptions below - adey - 20160902
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/software/mobile-computers/datawedge.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/software/mobile-computers/enterprise-keyboard.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/software/mobile-computers/mobile-app-utilities/emdk-for-android.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/software/mobile-computers/mobility-dna.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/software/mobile-computers/enterprise-mobility-management.html [or]
+
+    	# Ticket 15588 - Adding exceptions - cbowers 20160912
+        RewriteCond %{REQUEST_URI} ^/tr/tr/products/printers/rfid/on-metal-rfid-label-solution.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/general-purpose-scanners.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/general-purpose-scanners/handheld.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/general-purpose-scanners/handheld/(.*) [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/general-purpose-scanners/hands-free-on-counter.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/general-purpose-scanners/hands-free-on-counter/(.*) [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/fixed-mount-scanners/ds457.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/multi-plane-scanners/mp6000.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/general-purpose-scanners/in-counter.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/scanners/general-purpose-scanners/in-counter/ls7808.html [or]
+
+ 	# Ticket 15617 - Adding new exceptions - cbowers 20160913
+	RewriteCond %{REQUEST_URI} ^/(de/de|fr/fr|it/it)/solutions/retail-solutions.html [or]
+	RewriteCond %{REQUEST_URI} ^/(de/de|fr/fr|it/it)/solutions/retail-solutions/(.*) [or]
+
+	# Ticket 15618 - Adding new exceptions - cbowers 20160913
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/supplies.html [or]
+	RewriteCond %{REQUEST_URI} ^/cn/zh/products/supplies/(.*)
+
+
+	RewriteRule ^.*$ - [L]
+
+	# MDO-1478 China Rule
+	# Deactivated per Ticket #14769
+	# RewriteRule ^/cn/zh/(.*)$ /gb/en/$1 [R,L]
+
+	RewriteRule ^/tw/zh.html /gb/en.html [R,L]
+	RewriteRule ^/tw/zh/(.*)$ /gb/en/$1 [R,L]
+
+	# Ticket 14746 - cbowers - add Redirect below
+        RewriteRule ^/pl/pl/day/solutions/retail-solutions.html /gb/en/solutions/retail-solutions.html [R=301,L]
+
+	# Ticket 14812 - cbowers - add redirect below
+	RewriteCond %{HTTP_HOST}   ^.*zebra\.com$ [NC]
+        RewriteRule ^/(us/en|gb/en|fr/fr|de/de|it/it)/cpn/a-to-z-of-wireless/(.*) http://seemore.zebra.com/building-your-wireless-lan-from-a-to-z [R=301,L]
+
+	# vanity rewrite
+	#RewriteCond ${zebra_vanity_url:${lc:$1}} >""
+	#RewriteRule ^/(.*)$ https://%{HTTP_HOST}/${zebra_vanity_url:${lc:$1}} [R,L]
+
+	# legacy_url rewrite
+	RewriteCond ${legacy_zebra:${lc:$2}} >""
+	RewriteRule ^/([a-z][a-z]/[a-z][a-z])/(.*)$  https://%{HTTP_HOST}/$1/${legacy_zebra:${lc:$2}|${lc:$2}} [R,L]
+
+	# locale rewrite
+        RewriteCond ${locale:$1} >""
+	RewriteRule ^/([A-Z]+-[A-Z]+)(/.*)?$         https://%{HTTP_HOST}/${locale:$1}$2	[R,L]
+
+        # locale rewrite
+        RewriteCond ${locale_remap:$1} >""
+        RewriteRule ^/([a-z][a-z]/[a-z][a-z])(/.*)?$  https://%{HTTP_HOST}/${locale_remap:$1}$2     [R,L]
+        #RewriteRule ^/([a-z][a-z]/[a-z][a-z])(/?.*)$  https://%{HTTP_HOST}/${locale_remap:$1}$2     [R,L]
+
+	# sub_path rewrite
+	RewriteCond ${sub_path:$2} >""
+	RewriteRule ^/([a-z][a-z]/[a-z][a-z])/(.*)$   https://%{HTTP_HOST}/$1${sub_path:$2|$2}	 [R,L]
+        
+

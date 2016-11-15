@@ -1,10 +1,10 @@
 US-EN		us/en
-CN-ZH		gb/en
+CN-ZH		ap/en
 FR-FR		gb/en
 IL-HE		gb/en
 IN-EN		gb/en
-JP-JA		gb/en
-KR-KO		gb/en
+JP-JA		ap/en
+KR-KO		ap/en
 PL-PL		gb/en
 RU-RU		gb/en
 VN-VI		gb/en

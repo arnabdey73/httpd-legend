@@ -1,0 +1,2 @@
+RewriteCond %{HTTP_HOST} ^stage-medialibrary\.zebra\.com$ [NC]
+RewriteRule ^/$ http://%{HTTP_HOST}/content/zebra-media-library.html [R,L]
